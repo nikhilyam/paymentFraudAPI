@@ -71,10 +71,12 @@ Retrieve all processed transactions.
 After computing the numeric score, the service calls OpenAI API to generate a **natural language explanation** of the risk factors identified.
 
 ## Assumptions & Tradeoffs
-- **In-memory state:** Tracks seen IPs and fingerprints in-memory. Not persistent across restarts.
+- **In-memory state:** In-memory storage for logs (not persistent).
 - **LLM API cost:** Each evaluation calls the OpenAI API, which may incur usage costs.
 - **Simple Heuristics:** This is not a comprehensive fraud detection engine, just a rule-based score combined with AI explanation.
 - **Rate Limiting:** LLM requests use retry logic with backoff on 429 errors but lack advanced rate-limiting protections.
+- No real payment API integration for safety.
+- No database; logs and transactions are memory-based (reset on restart).
 
 ---
 ### Tech Stack
